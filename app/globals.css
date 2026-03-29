@@ -1,26 +1,46 @@
 @import "tailwindcss";
 
+@theme {
+  /* Nostalgic Cookbook Palette */
+  --color-parchment: #fdfbf7;
+  --color-parchment-dark: #f5f0e8;
+  --color-sepia-100: #f0e6d3;
+  --color-sepia-200: #e0ccaa;
+  --color-sepia-300: #c9a87c;
+  --color-sepia-400: #a67c52;
+  --color-ink: #2c1a0e;
+  --color-ink-light: #4a3728;
+  --color-ink-muted: #7a5c48;
+  --color-crimson: #c0392b;
+  --color-crimson-dark: #96281b;
+  --color-crimson-light: #e74c3c;
+  --color-burnt-orange: #c0560a;
+  --color-burnt-orange-dark: #9a4208;
+
+  /* Typography */
+  --font-serif: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* Sizing */
+  --radius-card: 1rem;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #fdfbf7;
+  --foreground: #2c1a0e;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent iOS bounce scroll on the root */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
 }

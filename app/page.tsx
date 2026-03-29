@@ -1,65 +1,202 @@
-import Image from "next/image";
+import RecordButton from "./components/RecordButton";
+
+const mockMemory = {
+  title: "Memaw's Sunday Lasagna",
+  memory:
+    "Oh honey, this is the lasagna I made the night your grandfather proposed. He was so nervous he almost knocked the pan right out of the oven! We lived in that tiny apartment on 4th street, and the whole hallway smelled like garlic for a week.",
+  ingredients: [
+    "1 lb ground sausage",
+    "2 cans crushed tomatoes",
+    "A healthy pinch of sugar",
+    "Ricotta cheese",
+  ],
+  author: "Memaw",
+  year: "1967",
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="h-full flex flex-col lg:flex-row overflow-hidden">
+      {/* ── Left Pane: Record ── */}
+      <section
+        className="
+          flex-none lg:w-[42%] xl:w-[38%]
+          flex flex-col items-center justify-center
+          gap-8 px-10 py-12
+          border-b lg:border-b-0 lg:border-r
+        "
+        style={{
+          background:
+            "linear-gradient(160deg, var(--color-sepia-100) 0%, var(--color-parchment) 100%)",
+          borderColor: "var(--color-sepia-200)",
+        }}
+      >
+        {/* Wordmark */}
+        <div className="text-center mb-2">
+          <h1
+            className="text-3xl xl:text-4xl font-bold tracking-tight"
+            style={{
+              fontFamily: "var(--font-serif)",
+              color: "var(--color-ink)",
+            }}
+          >
+            Ask Nana Anything
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p
+            className="text-sm uppercase tracking-widest mt-1"
+            style={{ color: "var(--color-ink-muted)" }}
+          >
+            The Family Lore Archive
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        {/* Big Record Button (client component for interactivity) */}
+        <RecordButton />
+      </section>
+
+      {/* ── Right Pane: Memory Card ── */}
+      <section
+        className="flex-1 overflow-y-auto p-8 xl:p-12 flex items-start justify-center"
+        style={{ background: "var(--color-parchment)" }}
+      >
+        <article
+          className="w-full max-w-2xl rounded-2xl shadow-xl overflow-hidden"
+          style={{
+            background: "var(--color-parchment-dark)",
+            border: "1px solid var(--color-sepia-200)",
+          }}
+        >
+          {/* Card Header */}
+          <div
+            className="px-8 pt-8 pb-4"
+            style={{ borderBottom: "2px solid var(--color-sepia-200)" }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <div className="flex items-baseline gap-3 flex-wrap">
+              <span
+                className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+                style={{
+                  background: "var(--color-sepia-300)",
+                  color: "var(--color-parchment)",
+                }}
+              >
+                Recipe + Memory
+              </span>
+              <span
+                className="text-sm"
+                style={{ color: "var(--color-ink-muted)" }}
+              >
+                {mockMemory.author} &middot; {mockMemory.year}
+              </span>
+            </div>
+            <h2
+              className="text-3xl xl:text-4xl font-bold mt-3 leading-tight"
+              style={{
+                fontFamily: "var(--font-serif)",
+                color: "var(--color-ink)",
+              }}
+            >
+              {mockMemory.title}
+            </h2>
+          </div>
+
+          {/* Memory Quote + Play Button */}
+          <div className="px-8 py-6">
+            <p
+              className="text-lg xl:text-xl leading-relaxed italic"
+              style={{
+                fontFamily: "var(--font-serif)",
+                color: "var(--color-ink-light)",
+              }}
+            >
+              &ldquo;{mockMemory.memory}&rdquo;
+            </p>
+
+            <button
+              className="
+                mt-5 flex items-center gap-3
+                px-6 py-3 rounded-full
+                font-semibold text-base
+                transition-all duration-200
+                hover:scale-105 active:scale-95
+                shadow-md hover:shadow-lg
+                cursor-pointer
+              "
+              style={{
+                background:
+                  "linear-gradient(135deg, var(--color-burnt-orange), var(--color-crimson))",
+                color: "#fdfbf7",
+              }}
+              aria-label="Play memory in Memaw's cloned voice"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-5 h-5 flex-none"
+                aria-hidden="true"
+              >
+                <path d="M8 5.14v14.72a1 1 0 0 0 1.5.86l11-7.36a1 1 0 0 0 0-1.72l-11-7.36A1 1 0 0 0 8 5.14Z" />
+              </svg>
+              Play Audio in Memaw&rsquo;s Voice
+            </button>
+          </div>
+
+          {/* Dashed Divider */}
+          <div
+            className="mx-8"
+            style={{ borderTop: "1px dashed var(--color-sepia-300)" }}
+          />
+
+          {/* Ingredients */}
+          <div className="px-8 py-6">
+            <h3
+              className="text-sm font-bold uppercase tracking-widest mb-4"
+              style={{ color: "var(--color-sepia-400)" }}
+            >
+              Ingredients
+            </h3>
+            <ul className="space-y-2">
+              {mockMemory.ingredients.map((ingredient) => (
+                <li key={ingredient} className="flex items-start gap-3">
+                  <span
+                    className="mt-2 w-2 h-2 rounded-full flex-none"
+                    style={{ background: "var(--color-sepia-300)" }}
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="text-lg"
+                    style={{ color: "var(--color-ink-light)" }}
+                  >
+                    {ingredient}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Card Footer */}
+          <div
+            className="px-8 py-4 flex items-center justify-between"
+            style={{
+              background: "var(--color-sepia-100)",
+              borderTop: "1px solid var(--color-sepia-200)",
+            }}
           >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            <span
+              className="text-sm"
+              style={{ color: "var(--color-ink-muted)" }}
+            >
+              Extracted by Gemini &middot; Voiced by ElevenLabs
+            </span>
+            <span
+              className="text-sm font-medium"
+              style={{ color: "var(--color-sepia-400)" }}
+            >
+              ✦ asknanaanything.tech
+            </span>
+          </div>
+        </article>
+      </section>
+    </main>
   );
 }
